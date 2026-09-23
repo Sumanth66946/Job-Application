@@ -1,5 +1,9 @@
 package Jobapp.FirstJobApplication.Job;
 
+import jakarta.persistence.Entity;
+
+@Entity
+
 public class Job {
     private Long id;
     private String title;

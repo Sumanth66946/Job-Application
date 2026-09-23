@@ -27,10 +27,16 @@ public class JobController {
         return jobService.getJobById(id);
     }
     @DeleteMapping("/jobs/{id}")
-
     public String deleteJobById(@PathVariable Long id){
         jobService.deleteJobById(id);
         return "Job deleted successfully";
     }
-
+    @PutMapping("/jobs/{id}")
+    public String updateJob(@PathVariable Long id,@RequestBody Job updatedJob){
+        boolean updated=jobService.updateJob(id, updatedJob);
+        if(updated){
+            return "Job Updated successfully";
+        }
+        return "Job not found";
+    }
 }

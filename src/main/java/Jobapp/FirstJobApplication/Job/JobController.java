@@ -27,9 +27,8 @@ public class JobController {
         return jobService.getJobById(id);
     }
     @DeleteMapping("/jobs/{id}")
-    public String deleteJobById(@PathVariable Long id){
-        jobService.deleteJobById(id);
-        return "Job deleted successfully";
+    public boolean deleteJobById(@PathVariable Long id){
+        return jobService.deleteJobById(id);
     }
     @PutMapping("/jobs/{id}")
     public String updateJob(@PathVariable Long id,@RequestBody Job updatedJob){

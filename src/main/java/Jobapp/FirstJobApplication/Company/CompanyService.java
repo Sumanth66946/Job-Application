@@ -1,4 +1,5 @@
 package Jobapp.FirstJobApplication.Company;
+
 import java.util.*;
 
 public interface CompanyService {

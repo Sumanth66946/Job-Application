@@ -1,6 +1,7 @@
 package Jobapp.FirstJobApplication.Company;
 
 import Jobapp.FirstJobApplication.Job.Job;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.*;
 
@@ -8,18 +9,18 @@ import java.util.*;
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String name;
     private String description;
-
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
     public Company() {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public String getName() {
@@ -35,7 +36,7 @@ public class Company {
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public void setName(String name) {

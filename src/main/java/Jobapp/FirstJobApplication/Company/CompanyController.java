@@ -29,4 +29,14 @@ public class CompanyController {
         companyService.createCompany(company);
         return "Company created successfully";
     }
+    @DeleteMapping("/companies/{id}")
+    public String deleteById(Long id){
+        boolean isDeleted=companyService.deleteCompany(id);
+        if(isDeleted) {
+            return "Company Deleted Successfully";
+        }else{
+            return "Not Found";
+        }
+
+    }
 }

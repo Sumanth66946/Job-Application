@@ -49,6 +49,11 @@ public class CompanyService implements Jobapp.FirstJobApplication.Company.Compan
 
     @Override
     public boolean deleteCompany(Long id) {
+        if(companyRepository.existsById(id)){
+            companyRepository.deleteById(id);
+            return true;
+        }
+
         return false;
     }
 }

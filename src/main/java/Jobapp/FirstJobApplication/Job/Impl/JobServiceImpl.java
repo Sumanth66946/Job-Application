@@ -1,5 +1,7 @@
 package Jobapp.FirstJobApplication.Job.Impl;
 
+import Jobapp.FirstJobApplication.Company.Company;
+import Jobapp.FirstJobApplication.Company.CompanyRepository;
 import Jobapp.FirstJobApplication.Job.Job;
 import Jobapp.FirstJobApplication.Job.JobRepository;
 import Jobapp.FirstJobApplication.Job.JobService;
@@ -11,11 +13,12 @@ import java.util.Optional;
 @Service
 public class JobServiceImpl implements JobService {
 
-    //private List<Job> jobs=new ArrayList<>();
-    JobRepository jobRepository;
+    private final JobRepository jobRepository;
+    private final CompanyRepository companyRepository;
 
-    public JobServiceImpl(JobRepository jobRepository) {
+    public JobServiceImpl(JobRepository jobRepository, CompanyRepository companyRepository) {
         this.jobRepository = jobRepository;
+        this.companyRepository = companyRepository;
     }
 
     @Override
@@ -25,6 +28,13 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void createJob(Job job) {
+        Company company = job.getCompany();
+        if (company != null && company.getId() != null) {
+            Company existingCompany = companyRepository.findById(company.getId())
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Company not found with id: " + company.getId()));
+            job.setCompany(existingCompany);
+        }
         jobRepository.save(job);
 
     }
